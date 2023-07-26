@@ -18,7 +18,10 @@ try:
 except ImportError:
     # the user has a downlevel version of setuptools.
     print("Error: dbt requires setuptools v40.1.0 or higher.")
-    print('Please upgrade setuptools with "pip install --upgrade setuptools" ' "and try again")
+    print(
+        'Please upgrade setuptools with "pip install --upgrade setuptools" '
+        "and try again"
+    )
     sys.exit(1)
 
 
@@ -30,7 +33,9 @@ with open(os.path.join(this_directory, "README.md")) as f:
 
 # get this package's version from dbt/adapters/<name>/__version__.py
 def _get_plugin_version_dict():
-    _version_path = os.path.join(this_directory, "dbt", "adapters", "snowflake", "__version__.py")
+    _version_path = os.path.join(
+        this_directory, "dbt", "adapters", "snowflake", "__version__.py"
+    )
     _semver = r"""(?P<major>\d+)\.(?P<minor>\d+)\.(?P<patch>\d+)"""
     _pre = r"""((?P<prekind>a|b|rc)(?P<pre>\d+))?"""
     _nightly = r"""(\.(?P<nightly>[a-z0-9]+)?)?"""
@@ -51,7 +56,7 @@ def _get_dbt_core_version():
 
 
 package_name = "dbt-snowflake"
-package_version = "1.7.0a1"
+package_version = "1.5.0"
 dbt_core_version = _get_dbt_core_version()
 description = """The Snowflake adapter plugin for dbt"""
 
@@ -68,7 +73,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "dbt-core==1.5.0",
-        "snowflake-connector-python[secure-local-storage]==2.9.0",
+        "snowflake-connector-python[secure-local-storage]~=3.0.0",
     ],
     zip_safe=False,
     classifiers=[
